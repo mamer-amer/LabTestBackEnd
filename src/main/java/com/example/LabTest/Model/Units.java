@@ -1,4 +1,4 @@
-package com.example.LabTest.Models;
+package com.example.LabTest.Model;
 
 import javax.persistence.*;
 
@@ -7,30 +7,30 @@ import javax.persistence.*;
 public class Units {
     @Id
     @GeneratedValue( strategy = GenerationType.AUTO)
-    private Long Id;
-    private  String UnitName;
+    private Long id;
+    private  String unitName;
 
     public Units() {
     }
 
     public Units(String unitName) {
-        UnitName = unitName;
+        this.unitName = unitName;
     }
 
     public Long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Long id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getUnitName() {
-        return UnitName;
+        return unitName;
     }
 
     public void setUnitName(String unitName) {
-        UnitName = unitName;
+        this.unitName = unitName;
     }
 }
 
