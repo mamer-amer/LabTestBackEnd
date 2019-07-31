@@ -1,7 +1,6 @@
 package com.example.LabTest.DTO;
 
-import com.example.LabTest.Model.LabTest;
-import com.example.LabTest.Model.Report;
+import com.example.LabTest.Model.*;
 
 import java.util.Date;
 
@@ -11,6 +10,8 @@ public class ReportDTO {
     private  Long patientId;
     private Date createdDate;
     private LabTest labTest;
+
+
 
     public ReportDTO() {
     }
@@ -22,6 +23,7 @@ public class ReportDTO {
         this.createdDate = createdDate;
         this.labTest = labTest;
     }
+
 
     public Long getId() {
         return id;

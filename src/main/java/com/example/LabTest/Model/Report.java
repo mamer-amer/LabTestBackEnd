@@ -14,6 +14,7 @@ public class Report {
     private String reportName;
     private  Long patientId;
     private Date createdDate;
+
     @OneToOne
     @JoinColumn(name = "labtest_id",nullable = false)
     public LabTest labTest;

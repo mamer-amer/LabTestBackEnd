@@ -13,14 +13,14 @@ public class ReportService {
     @Autowired
     ReportRepository reportRepository;
 
-    public String saveReport(ReportDTO reportDTO){
+    public Long saveReport(ReportDTO reportDTO){
         Report report = new Report();
         report.setReportName(reportDTO.getReportName());
         report.setPatientId(reportDTO.getPatientId());
         report.setCreatedDate(new Date());
         report.setLabTest(reportDTO.getLabTest());
         reportRepository.save(report);
-        return "{\"report added successfully with labtest \":1}";
+        return report.getId();
     }
 
 }
