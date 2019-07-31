@@ -8,6 +8,8 @@ import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.stereotype.Service;
 import com.example.LabTest.Repository.NormalValuesRepository;
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class NormalvalueService {
 
@@ -24,5 +26,26 @@ public class NormalvalueService {
     public List<NormalValues> getNormalvalues(){
         List<NormalValues> normalValuesList =  normalValuesRepository.findAll();
         return  normalValuesList;
+    }
+
+    public String updateNormallValueByID(Long id,NormalValuesDTO normalValuesDTO){
+        Optional<NormalValues> normalValues = normalValuesRepository.findById(id);
+
+        NormalValues updatedNormalValues = normalValues.get();
+        updatedNormalValues.setNormalvalueName(normalValuesDTO.getNormalvalueName());
+
+        normalValuesRepository.save(updatedNormalValues);
+
+        return "{\" UPDATED SUCCESFULLY\":1}";
+    }
+
+    public List<NormalValues> deleteNormalValuesByID(Long id){
+        Optional<NormalValues> normVal = normalValuesRepository.findById(id);
+
+        if(normVal.isPresent()){
+            normalValuesRepository.deleteById(id);
+        }
+
+        return this.getNormalvalues();
     }
 }

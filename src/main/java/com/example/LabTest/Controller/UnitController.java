@@ -24,4 +24,16 @@ public class UnitController {
     public List<Units> getAllUnit(){
         return unitService.getUnits();
     }
+
+    @PutMapping("update/{id}")
+    public String updateUnit(@PathVariable("id") Long id, @RequestBody UnitsDTO unitsDTO){
+        return unitService.updateUnitByID(id,unitsDTO);
+    }
+
+    @DeleteMapping("/{id}")
+    public List<Units> deleteUnitByID(@PathVariable("id") Long id){
+        return unitService.deleteUnitByID(id);
+    }
+
+
 }
