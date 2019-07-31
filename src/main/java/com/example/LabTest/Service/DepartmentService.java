@@ -46,5 +46,28 @@ public class DepartmentService {
 
     }
 
+    public String updatePatientByID(Long id,DepartmentDTO departmentDTO){
+        Optional<Department> department = departmentRepository.findById(id);
+
+        Department updatedDepartment = department.get();
+        updatedDepartment.setDepartmentName(departmentDTO.getDepartmentName());
+
+        departmentRepository.save(updatedDepartment);
+
+        return "{\" UPDATED SUCCESFULLY\":1}";
+    }
+
+
+    public List<Department> deleteDeptByID(Long id){
+        Optional<Department> dept = departmentRepository.findById(id);
+
+        if(dept.isPresent()){
+            departmentRepository.deleteById(id);
+        }
+
+        return this.getDepartment();
+    }
+
+
 
 }

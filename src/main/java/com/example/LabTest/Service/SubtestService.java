@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SubtestService {
@@ -26,4 +27,23 @@ public class SubtestService {
     }
 
 
+     public String updateSubTestByID(Long id,SubTestsDTO subTestsDTO){
+         Optional<SubTests> subTests = subTestsRepository.findById(id);
+
+         SubTests updateSubTest = subTests.get();
+         updateSubTest.setSubtestName(subTestsDTO.getSubtestName());
+
+         subTestsRepository.save(updateSubTest);
+
+         return "{\" UPDATED SUCCESFULLY\":1}";
+     }
+
+     public List<SubTests> deleteSubTestsByID(Long id){
+        Optional<SubTests> subtest = subTestsRepository.findById(id);
+
+        if(subtest.isPresent()){
+            subTestsRepository.deleteById(id);
+        }
+        return  this.getSubtests();
+     }
 }

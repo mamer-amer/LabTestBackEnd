@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.example.LabTest.Repository.LabTestRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class LabTestService {
@@ -22,9 +23,40 @@ public class LabTestService {
 
         return "{\"LabTest Added SuccessFully\":1}";
     }
+
+
     public List<LabTest> getLabTest(){
         List<LabTest> labTests =  labTestRepository.findAll();
         return  labTests;
     }
 
+    public String updateLabTestByID(Long id,LabTestDTO labTestDTO){
+
+        Optional<LabTest> labTest = labTestRepository.findById(id);
+        if(labTest != null){
+            LabTest updatedLabTest = labTest.get();
+            updatedLabTest.setLabtestName(labTestDTO.getLabtestName());
+            labTestRepository.save(updatedLabTest);
+            return "{\" UPDATED SUCCESFULLY\":1}";
+        }else{
+            return "{\" not found \":1}";
+        }
+
+    }
+    public LabTest getlabtestbyid(Long id){
+        Optional<LabTest> labTest = labTestRepository.findById(id);
+        if(labTest.isPresent()){
+            return labTest.get();
+        }
+        return null;
+    }
+
+    public List<LabTest> deleteLabTestByID(Long id){
+        Optional<LabTest> lab = labTestRepository.findById(id);
+        if(lab.isPresent()){
+            labTestRepository.deleteById(id);
+        }
+
+        return this.getLabTest();
+    }
 }

@@ -26,4 +26,14 @@ public class NormalvalueController {
     public List<NormalValues> getNormalvalue(){
        return normalvalueService.getNormalvalues();
     }
+
+    @PutMapping("update/{id}")
+    public String updateNormallValue(@PathVariable("id") Long id, @RequestBody NormalValuesDTO normalValuesDTO){
+        return normalvalueService.updateNormallValueByID(id,normalValuesDTO);
+    }
+
+    @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
+    public List<NormalValues> deleteNormalValuesByID(@PathVariable("id") Long id){
+        return normalvalueService.deleteNormalValuesByID(id);
+    }
 }

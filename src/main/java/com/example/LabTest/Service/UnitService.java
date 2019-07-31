@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.example.LabTest.Repository.UnitsRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UnitService {
@@ -24,5 +25,33 @@ public class UnitService {
     public List<Units> getUnits(){
         List<Units> unitsList = unitsRepository.findAll();
         return  unitsList;
+    }
+
+    public String updateUnitByID(Long id,UnitsDTO unitsDTO){
+        Optional<Units> units = unitsRepository.findById(id);
+
+        Units updatedUnits = units.get();
+        updatedUnits.setUnitName(unitsDTO.getUnitName());
+
+        unitsRepository.save(updatedUnits);
+
+        return "{\" UPDATED SUCCESFULLY\":1}";
+    }
+    public Units getlabtestbyid(Long id){
+        Optional<Units> Units = unitsRepository.findById(id);
+        if(Units.isPresent()){
+            return Units.get();
+        }
+        return null;
+    }
+
+    public List<Units> deleteUnitByID(Long id){
+        Optional<Units> unit = unitsRepository.findById(id);
+
+        if(unit.isPresent()){
+            unitsRepository.deleteById(id);
+        }
+
+        return this.getUnits();
     }
 }
