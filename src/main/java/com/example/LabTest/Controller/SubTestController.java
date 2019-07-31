@@ -17,8 +17,6 @@ public class SubTestController {
     @Autowired
     SubtestService subtestService;
 
-
-
     @PostMapping("/")
     public String addSubTest(@RequestBody SubTestsDTO subTestsDTO){
         return  subtestService.saveSubTest(subTestsDTO);
@@ -27,5 +25,15 @@ public class SubTestController {
     @GetMapping("/")
     public List<SubTests> getSubtest(){
         return  subtestService.getSubtests();
+    }
+
+    @PutMapping("update/{id}")
+    public String updateSubTest(@PathVariable("id") Long id, SubTestsDTO subTestsDTO){
+        return subtestService.updateSubTestByID(id,subTestsDTO);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public List<SubTests> deleteSubTestsByID(@PathVariable("id") Long id){
+        return subtestService.deleteSubTestsByID(id);
     }
 }

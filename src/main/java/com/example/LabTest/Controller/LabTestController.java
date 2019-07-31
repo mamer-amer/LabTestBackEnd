@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin
 @RestController
@@ -25,8 +26,19 @@ public class LabTestController {
         return  this.labTestService.getLabTest();
     }
 
-//    
-//    @GetMapping("/{id}")
-//    public
+    @GetMapping("/{id}")
+    public LabTest labTest(@PathVariable("id") Long id){
+        return  this.labTestService.getlabtestbyid(id);
+    }
+
+    @PutMapping("update/{id}")
+    public String updateLabTest(@PathVariable("id") Long id, @RequestBody LabTestDTO labTestDTO){
+        return labTestService.updateLabTestByID(id,labTestDTO);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public List<LabTest> deleteLabTestByID(@PathVariable("id") Long id){
+        return labTestService.deleteLabTestByID(id);
+    }
 
 }
