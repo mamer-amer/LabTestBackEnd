@@ -26,16 +26,15 @@ public class DepartmentController {
        return  this.departmentService.getDepartment();
  }
 
-    @GetMapping("/{id}")
-    public List<LabTest> get_labtest_based_on_department(@PathVariable("id") Long id){
-        return  departmentService.get_labtest_based_on_department(id);
-    }
+//    @GetMapping("/{id}")
+//    public List<LabTest> get_labtest_based_on_department(@PathVariable("id") Long id){
+//        return  departmentService.get_labtest_based_on_department(id);
+//    }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public List<Department> deleteDepartmentByID(@PathVariable("id") Long id){
         return departmentService.deleteDeptByID(id);
         }
-
 
 
     @PutMapping("update/{id}")

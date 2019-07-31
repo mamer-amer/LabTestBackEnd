@@ -15,18 +15,7 @@ public class Report {
     private  Long patientId;
     private Date createdDate;
 
-    @OneToOne
-    @JoinColumn(name = "labtest_id",nullable = false)
-    public LabTest labTest;
-
     public Report() {
-    }
-
-    public Report(String reportName, Long patientId, Date createdDate, LabTest labTest) {
-        this.reportName = reportName;
-        this.patientId = patientId;
-        this.createdDate = createdDate;
-        this.labTest = labTest;
     }
 
     public Long getId() {
@@ -61,11 +50,9 @@ public class Report {
         this.createdDate = createdDate;
     }
 
-    public LabTest getLabTest() {
-        return labTest;
-    }
-
-    public void setLabTest(LabTest labTest) {
-        this.labTest = labTest;
+    public Report(String reportName, Long patientId, Date createdDate) {
+        this.reportName = reportName;
+        this.patientId = patientId;
+        this.createdDate = createdDate;
     }
 }

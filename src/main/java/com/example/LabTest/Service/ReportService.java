@@ -18,7 +18,7 @@ public class ReportService {
         report.setReportName(reportDTO.getReportName());
         report.setPatientId(reportDTO.getPatientId());
         report.setCreatedDate(new Date());
-        report.setLabTest(reportDTO.getLabTest());
+//        report.setLabTest(reportDTO.getLabTest());
         reportRepository.save(report);
         return report.getId();
     }

@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 @Qualifier("labTestRepository")
 public interface LabTestRepository  extends JpaRepository<LabTest,Long> {
-    public List<LabTest> getLabTestByDepartment_Id(Long id);
+//    public List<LabTest> getLabTestByDepartment_Id(Long id);
 }

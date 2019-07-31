@@ -18,7 +18,7 @@ public class LabTestService {
     public String addLabTest(LabTestDTO labTestDTO){
         LabTest labTest = new LabTest();
         labTest.setLabtestName(labTestDTO.getLabtestName());
-        labTest.setDepartment(labTestDTO.getDepartment());
+//        labTest.setDepartment(labTestDTO.getDepartment());
         labTestRepository.save(labTest);
 
         return "{\"LabTest Added SuccessFully\":1}";
