@@ -46,7 +46,7 @@ public class DepartmentService {
 //
 //    }
 
-    public String updatePatientByID(Long id,DepartmentDTO departmentDTO){
+    public String updateDeparmentByID(Long id,DepartmentDTO departmentDTO){
         Optional<Department> department = departmentRepository.findById(id);
         Department updatedDepartment = department.get();
         updatedDepartment.setDepartmentName(departmentDTO.getDepartmentName());

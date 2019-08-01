@@ -27,7 +27,7 @@ public class DepartmentController {
  }
 
 //    @GetMapping("/{id}")
-//    public List<LabTest> get_labtest_based_on_department(@PathVariable("id") Long id){
+//    public List<LabTest> getReport(@PathVariable("id") Long id){
 //        return  departmentService.get_labtest_based_on_department(id);
 //    }
 
@@ -39,7 +39,7 @@ public class DepartmentController {
 
     @PutMapping("update/{id}")
     public String updateDepartment(@PathVariable("id") Long id,@RequestBody DepartmentDTO departmentDTO){
-        return departmentService.updatePatientByID(id,departmentDTO);
+        return departmentService.updateDeparmentByID(id,departmentDTO);
     }
 
 }

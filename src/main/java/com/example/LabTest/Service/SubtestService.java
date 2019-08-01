@@ -18,7 +18,7 @@ public class SubtestService {
         SubTests subTests = new SubTests();
         subTests.setSubtestName(subTestsDTO.getSubtestName());
         subTestsRepository.save(subTests);
-        return "{\"subtest added successfully\"}";
+        return "{\"subtest added successfully:1\"}";
     }
 
     public List<SubTests> getSubtests(){

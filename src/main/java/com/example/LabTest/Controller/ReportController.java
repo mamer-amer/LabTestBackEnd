@@ -47,10 +47,11 @@ public class ReportController {
         return response;
     }
 
-//    @GetMapping("/{id}")
-//    public List<ReportSubtest>  reportSubtestList(@PathVariable("id") Long id){
-//
-//    }
+    @GetMapping("/{id}")
+    public GenerateReportDTO getReport(@PathVariable("id") Long id){
+        return this.reportService.getReport(id);
+    }
+
 
 
 }
