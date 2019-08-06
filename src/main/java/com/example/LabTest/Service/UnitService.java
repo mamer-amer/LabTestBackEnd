@@ -20,7 +20,7 @@ public class UnitService {
         Units units = new Units();
         units.setUnitName(unitsDTO.getUnitName());
         unitsRepository.save(units);
-        return "{\"Units added successfully:1\"}";
+      return "{\"successful\":1}";
     }
     public List<Units> getUnits(){
         List<Units> unitsList = unitsRepository.findAll();
@@ -29,10 +29,8 @@ public class UnitService {
 
     public String updateUnitByID(Long id,UnitsDTO unitsDTO){
         Optional<Units> units = unitsRepository.findById(id);
-
         Units updatedUnits = units.get();
         updatedUnits.setUnitName(unitsDTO.getUnitName());
-
         unitsRepository.save(updatedUnits);
 
         return "{\" UPDATED SUCCESFULLY\":1}";

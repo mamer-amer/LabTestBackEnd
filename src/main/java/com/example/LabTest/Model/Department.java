@@ -34,7 +34,7 @@ public class Department {
     public void setDepartmentName(String departmentName) {
         this.departmentName = departmentName;
     }
-    //    @OneToMany(mappedBy = "department")
+//        @ManyToMany(mappedBy = "department")
 //    private List<LabTest> labTest;
 
 //    public Department() {

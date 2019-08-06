@@ -21,7 +21,7 @@ public class LabTestService {
 //        labTest.setDepartment(labTestDTO.getDepartment());
         labTestRepository.save(labTest);
 
-        return "{\"LabTest Added SuccessFully\":1}";
+        return "{\"successful\":1}";
     }
 
 

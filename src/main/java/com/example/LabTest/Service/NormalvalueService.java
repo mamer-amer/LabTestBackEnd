@@ -21,7 +21,7 @@ public class NormalvalueService {
          normalValues.setNormalvalueName(normalValuesDTO.getNormalvalueName());
          normalValuesRepository.save(normalValues);
 
-        return "{\"normal values added successfully:1\"}";
+        return "{\"successful\":1}";
     }
     public List<NormalValues> getNormalvalues(){
         List<NormalValues> normalValuesList =  normalValuesRepository.findAll();

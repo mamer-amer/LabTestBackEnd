@@ -4,6 +4,9 @@ public class SubTestsDTO {
     private Long id;
     private  String subtestName;
 
+    public SubTestsDTO() {
+    }
+
     public SubTestsDTO(Long id, String subtestName) {
         this.id = id;
         this.subtestName = subtestName;
