@@ -27,8 +27,8 @@ public class SubTestController {
         return  subtestService.getSubtests();
     }
 
-    @PutMapping("update/{id}")
-    public String updateSubTest(@PathVariable("id") Long id, SubTestsDTO subTestsDTO){
+    @PutMapping("/{id}")
+    public String updateSubTest(@PathVariable("id") Long id, @RequestBody SubTestsDTO subTestsDTO){
         return subtestService.updateSubTestByID(id,subTestsDTO);
     }
 

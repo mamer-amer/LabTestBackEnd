@@ -27,7 +27,7 @@ public class NormalvalueController {
        return normalvalueService.getNormalvalues();
     }
 
-    @PutMapping("update/{id}")
+    @PutMapping("/{id}")
     public String updateNormallValue(@PathVariable("id") Long id, @RequestBody NormalValuesDTO normalValuesDTO){
         return normalvalueService.updateNormallValueByID(id,normalValuesDTO);
     }

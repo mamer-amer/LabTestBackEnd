@@ -32,12 +32,9 @@ public class SubtestService {
 
      public String updateSubTestByID(Long id,SubTestsDTO subTestsDTO){
          Optional<SubTests> subTests = subTestsRepository.findById(id);
-
          SubTests updateSubTest = subTests.get();
          updateSubTest.setSubtestName(subTestsDTO.getSubtestName());
-
          subTestsRepository.save(updateSubTest);
-
          return "{\" UPDATED SUCCESFULLY\":1}";
      }
 

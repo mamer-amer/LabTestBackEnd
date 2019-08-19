@@ -3,6 +3,7 @@ package com.example.LabTest.DTO;
 import com.example.LabTest.Model.*;
 
 import java.util.Date;
+import java.util.List;
 
 public class ReportDTO {
     private  Long id;
@@ -10,20 +11,19 @@ public class ReportDTO {
     private  Long patientId;
     private Date createdDate;
     private LabTest labTest;
-
-
+    public List<ReportDetails> reportDetailsList;
 
     public ReportDTO() {
     }
 
-    public ReportDTO(Long id, String reportName, Long patientId, Date createdDate, LabTest labTest) {
+    public ReportDTO(Long id, String reportName, Long patientId, Date createdDate, LabTest labTest, List<ReportDetails> reportDetailsList) {
         this.id = id;
         this.reportName = reportName;
         this.patientId = patientId;
         this.createdDate = createdDate;
         this.labTest = labTest;
+        this.reportDetailsList = reportDetailsList;
     }
-
 
     public Long getId() {
         return id;
@@ -63,5 +63,13 @@ public class ReportDTO {
 
     public void setLabTest(LabTest labTest) {
         this.labTest = labTest;
+    }
+
+    public List<ReportDetails> getReportDetailsList() {
+        return reportDetailsList;
+    }
+
+    public void setReportDetailsList(List<ReportDetails> reportDetailsList) {
+        this.reportDetailsList = reportDetailsList;
     }
 }
