@@ -31,7 +31,7 @@ public class LabTestController {
         return  this.labTestService.getlabtestbyid(id);
     }
 
-    @PutMapping("update/{id}")
+    @PutMapping("/{id}")
     public String updateLabTest(@PathVariable("id") Long id, @RequestBody LabTestDTO labTestDTO){
         return labTestService.updateLabTestByID(id,labTestDTO);
     }

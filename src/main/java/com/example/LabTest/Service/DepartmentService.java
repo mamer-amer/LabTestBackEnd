@@ -35,16 +35,7 @@ public class DepartmentService {
         List<Department> departmentList = departmentRepository.findAll();
         return  departmentList;
     }
-//    public List<LabTest> get_labtest_based_on_department(Long id){
-//        List<LabTest> labTest = labTestRepository.getLabTestByDepartment_Id(id);
-//        if(labTest!=null){
-//            return labTest;
-//        }
-//        else{
-//            return null;
-//        }
-//
-//    }
+
 
     public String updateDeparmentByID(Long id,DepartmentDTO departmentDTO){
         Optional<Department> department = departmentRepository.findById(id);

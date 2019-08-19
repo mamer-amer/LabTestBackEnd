@@ -25,7 +25,7 @@ public class UnitController {
         return unitService.getUnits();
     }
 
-    @PutMapping("update/{id}")
+    @PutMapping("/{id}")
     public String updateUnit(@PathVariable("id") Long id, @RequestBody UnitsDTO unitsDTO){
         return unitService.updateUnitByID(id,unitsDTO);
     }

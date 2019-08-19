@@ -1,29 +1,43 @@
 package com.example.LabTest.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name = "ReportSubtest")
-public class ReportSubtest {
+@Table(name = "ReportDetails")
+public class ReportDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private Long reportid;
     private Long subtestid;
     private Long unitid;
     private Long normalid;
 
 
-    public ReportSubtest() {
+    @ManyToOne
+    @JoinColumn(name = "report_id",nullable = false)
+    @JsonBackReference
+    public Report report;
+//    @OneToMany(mappedBy = "reportdetails")
+//    private List<SubTests> subTestsList;
+//
+//    @OneToMany(mappedBy = "reportdetails")
+//    private List<Units> unitsList;
+//
+//    @OneToMany(mappedBy = "reportdetails")
+//    private  List<NormalValues> normalValuesList;
 
+
+    public ReportDetails() {
     }
 
-    public ReportSubtest(Long reportid, Long subtestid, Long unitid, Long normalid) {
-        this.reportid = reportid;
+    public ReportDetails(Long subtestid, Long unitid, Long normalid, Report report) {
         this.subtestid = subtestid;
         this.unitid = unitid;
         this.normalid = normalid;
+        this.report = report;
     }
 
     public Long getId() {
@@ -32,14 +46,6 @@ public class ReportSubtest {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getReportid() {
-        return reportid;
-    }
-
-    public void setReportid(Long reportid) {
-        this.reportid = reportid;
     }
 
     public Long getSubtestid() {
@@ -64,5 +70,13 @@ public class ReportSubtest {
 
     public void setNormalid(Long normalid) {
         this.normalid = normalid;
+    }
+
+    public Report getReport() {
+        return report;
+    }
+
+    public void setReport(Report report) {
+        this.report = report;
     }
 }

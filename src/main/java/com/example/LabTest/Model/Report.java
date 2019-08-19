@@ -1,21 +1,32 @@
 package com.example.LabTest.Model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "Report")
 public class Report {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private  Long id;
     private String reportName;
     private  Long patientId;
     private Date createdDate;
 
+    @OneToMany(mappedBy = "report")
+    public List<ReportDetails> reportDetailsList;
+
+
     public Report() {
+    }
+
+    public Report(String reportName, Long patientId, Date createdDate, List<ReportDetails> reportDetailsList) {
+        this.reportName = reportName;
+        this.patientId = patientId;
+        this.createdDate = createdDate;
+        this.reportDetailsList = reportDetailsList;
     }
 
     public Long getId() {
@@ -50,9 +61,11 @@ public class Report {
         this.createdDate = createdDate;
     }
 
-    public Report(String reportName, Long patientId, Date createdDate) {
-        this.reportName = reportName;
-        this.patientId = patientId;
-        this.createdDate = createdDate;
+    public List<ReportDetails> getReportDetailsList() {
+        return reportDetailsList;
+    }
+
+    public void setReportDetailsList(List<ReportDetails> reportDetailsList) {
+        this.reportDetailsList = reportDetailsList;
     }
 }

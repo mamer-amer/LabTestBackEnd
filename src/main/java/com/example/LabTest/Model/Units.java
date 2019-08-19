@@ -10,6 +10,11 @@ public class Units {
     private Long id;
     private  String unitName;
 
+//    @ManyToOne
+//    @JoinColumn(name = "reportdetails_id",nullable = false)
+//    public ReportDetails reportdetails;
+
+
     public Units() {
     }
 

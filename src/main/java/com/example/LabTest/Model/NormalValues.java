@@ -11,11 +11,16 @@ public class NormalValues {
     private Long id;
     private  String normalvalueName;
 
-    public NormalValues(String normalvalueName) {
-        this.normalvalueName = normalvalueName;
-    }
+//    @ManyToOne
+//    @JoinColumn(name = "reportdetails_id",nullable = false)
+//    public ReportDetails reportdetails;
+
 
     public NormalValues() {
+    }
+
+    public NormalValues(String normalvalueName) {
+        this.normalvalueName = normalvalueName;
     }
 
     public Long getId() {

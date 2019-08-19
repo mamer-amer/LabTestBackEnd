@@ -1,7 +1,7 @@
 package com.example.LabTest.DTO;
 
-import com.example.LabTest.Model.ReportSubtest;
-import com.example.LabTest.Model.SubTests;
+import com.example.LabTest.Model.ReportDetails;
+
 import java.util.List;
 
 public class GenerateReportDTO {
@@ -9,18 +9,18 @@ public class GenerateReportDTO {
     private String reportName;
     private Long labtestid;
     private Long patientid;
-    private List<ReportSubtest> reportSubtests;
+    private List<ReportDetails> reportDetails;
 
     public GenerateReportDTO() {
 
     }
 
-    public GenerateReportDTO(Long reportid, String reportName, Long labtestid, Long patientid, List<ReportSubtest> reportSubtests) {
+    public GenerateReportDTO(Long reportid, String reportName, Long labtestid, Long patientid, List<ReportDetails> reportDetails) {
         this.reportid = reportid;
         this.reportName = reportName;
         this.labtestid = labtestid;
         this.patientid = patientid;
-        this.reportSubtests = reportSubtests;
+        this.reportDetails = reportDetails;
     }
 
     public Long getReportid() {
@@ -55,11 +55,11 @@ public class GenerateReportDTO {
         this.patientid = patientid;
     }
 
-    public List<ReportSubtest> getReportSubtests() {
-        return reportSubtests;
+    public List<ReportDetails> getReportDetails() {
+        return reportDetails;
     }
 
-    public void setReportSubtests(List<ReportSubtest> reportSubtests) {
-        this.reportSubtests = reportSubtests;
+    public void setReportDetails(List<ReportDetails> reportDetails) {
+        this.reportDetails = reportDetails;
     }
 }
