@@ -12,9 +12,10 @@ public class Report {
 
     private  Long id;
     private String reportName;
-    private  Long patientId;
+    private String departmentName;
     private Date createdDate;
 
+    /*One to Many Relation with Report Details Entity*/
     @OneToMany(mappedBy = "report")
     public List<ReportDetails> reportDetailsList;
 
@@ -22,9 +23,9 @@ public class Report {
     public Report() {
     }
 
-    public Report(String reportName, Long patientId, Date createdDate, List<ReportDetails> reportDetailsList) {
+    public Report(String reportName, String departmentName, Date createdDate, List<ReportDetails> reportDetailsList) {
         this.reportName = reportName;
-        this.patientId = patientId;
+        this.departmentName = departmentName;
         this.createdDate = createdDate;
         this.reportDetailsList = reportDetailsList;
     }
@@ -45,12 +46,12 @@ public class Report {
         this.reportName = reportName;
     }
 
-    public Long getPatientId() {
-        return patientId;
+    public String getDepartmentName() {
+        return departmentName;
     }
 
-    public void setPatientId(Long patientId) {
-        this.patientId = patientId;
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
     }
 
     public Date getCreatedDate() {
