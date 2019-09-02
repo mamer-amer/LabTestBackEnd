@@ -11,9 +11,9 @@ public class ReportDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long subtestid;
-    private Long unitid;
-    private Long normalid;
+    private String subtest;
+    private String unit;
+    private String normal;
 
 
     @ManyToOne
@@ -33,10 +33,10 @@ public class ReportDetails {
     public ReportDetails() {
     }
 
-    public ReportDetails(Long subtestid, Long unitid, Long normalid, Report report) {
-        this.subtestid = subtestid;
-        this.unitid = unitid;
-        this.normalid = normalid;
+    public ReportDetails(String subtest, String unit, String normal, Report report) {
+        this.subtest = subtest;
+        this.unit = unit;
+        this.normal = normal;
         this.report = report;
     }
 
@@ -48,28 +48,28 @@ public class ReportDetails {
         this.id = id;
     }
 
-    public Long getSubtestid() {
-        return subtestid;
+    public String getSubtest() {
+        return subtest;
     }
 
-    public void setSubtestid(Long subtestid) {
-        this.subtestid = subtestid;
+    public void setSubtest(String subtest) {
+        this.subtest = subtest;
     }
 
-    public Long getUnitid() {
-        return unitid;
+    public String getUnit() {
+        return unit;
     }
 
-    public void setUnitid(Long unitid) {
-        this.unitid = unitid;
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
 
-    public Long getNormalid() {
-        return normalid;
+    public String getNormal() {
+        return normal;
     }
 
-    public void setNormalid(Long normalid) {
-        this.normalid = normalid;
+    public void setNormal(String normal) {
+        this.normal = normal;
     }
 
     public Report getReport() {

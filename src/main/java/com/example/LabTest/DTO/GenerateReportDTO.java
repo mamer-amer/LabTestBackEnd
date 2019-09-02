@@ -6,20 +6,18 @@ import java.util.List;
 
 public class GenerateReportDTO {
     private Long reportid;
-    private String reportName;
-    private Long labtestid;
-    private Long patientid;
+    private String labtestName;
+    private String departmentName;
     private List<ReportDetails> reportDetails;
 
     public GenerateReportDTO() {
 
     }
 
-    public GenerateReportDTO(Long reportid, String reportName, Long labtestid, Long patientid, List<ReportDetails> reportDetails) {
+    public GenerateReportDTO(Long reportid, String labtestName, String departmentName, List<ReportDetails> reportDetails) {
         this.reportid = reportid;
-        this.reportName = reportName;
-        this.labtestid = labtestid;
-        this.patientid = patientid;
+        this.labtestName = labtestName;
+        this.departmentName = departmentName;
         this.reportDetails = reportDetails;
     }
 
@@ -31,28 +29,20 @@ public class GenerateReportDTO {
         this.reportid = reportid;
     }
 
-    public String getReportName() {
-        return reportName;
+    public String getLabtestName() {
+        return labtestName;
     }
 
-    public void setReportName(String reportName) {
-        this.reportName = reportName;
+    public void setLabtestName(String labtestName) {
+        this.labtestName = labtestName;
     }
 
-    public Long getLabtestid() {
-        return labtestid;
+    public String getDepartmentName() {
+        return departmentName;
     }
 
-    public void setLabtestid(Long labtestid) {
-        this.labtestid = labtestid;
-    }
-
-    public Long getPatientid() {
-        return patientid;
-    }
-
-    public void setPatientid(Long patientid) {
-        this.patientid = patientid;
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
     }
 
     public List<ReportDetails> getReportDetails() {
