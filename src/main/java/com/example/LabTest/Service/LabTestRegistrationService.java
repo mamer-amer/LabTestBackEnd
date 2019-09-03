@@ -2,6 +2,7 @@ package com.example.LabTest.Service;
 
 
 import com.example.LabTest.DTO.LabTestRegistrationDTO;
+import com.example.LabTest.DTO.RestTemplateResponseDTO;
 import com.example.LabTest.Model.LabTestRegistration;
 import com.example.LabTest.Repository.LabTestRegistrationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,18 @@ public class LabTestRegistrationService {
             }
         });
         return listFiltered;
+    }
+
+    public RestTemplateResponseDTO getLabTestOpd() {
+        List<LabTestRegistration> list = labTestRegistrationRepository.findAll();
+        List<LabTestRegistration> listFiltered = new ArrayList<>();
+        list.forEach(i -> {
+            if (i.getStatus().equalsIgnoreCase("ACTIVE")){
+                listFiltered.add(i);
+            }
+        });
+        RestTemplateResponseDTO response = new RestTemplateResponseDTO("200","Get Successfully",listFiltered);
+        return response;
     }
 
 

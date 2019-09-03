@@ -2,6 +2,7 @@ package com.example.LabTest.Controller;
 
 
 import com.example.LabTest.DTO.LabTestRegistrationDTO;
+import com.example.LabTest.DTO.RestTemplateResponseDTO;
 import com.example.LabTest.Model.LabTestRegistration;
 import com.example.LabTest.Service.LabTestRegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,11 @@ public class LabTestRegistrationController {
     @PostMapping("/")
     public String postLabtest(@RequestBody LabTestRegistrationDTO labtestDTO){
         return labTestRegistrationService.postLabTest(labtestDTO);
+    }
+
+    @GetMapping("/opd")
+    public RestTemplateResponseDTO getlabtestOpd(){
+        return labTestRegistrationService.getLabTestOpd();
     }
 
     @GetMapping("/")

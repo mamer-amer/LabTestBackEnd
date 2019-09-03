@@ -14,6 +14,7 @@ import org.springframework.http.client.support.BasicAuthorizationInterceptor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -69,7 +70,14 @@ public List<PatientLabtestDetails> getProcessReport(){
    // RestTemplateResponseDTO restTemplateResponseDTO = restTemplate.getForObject("http://localhost:8080/api/opdlabtest/", RestTemplateResponseDTO.class,entity);
 
 List<PatientLabtestDetails> patientLabtestDetails = response.getBody().getBodyList();
-return patientLabtestDetails;
+List<PatientLabtestDetails> patientLabtestDetailsListviaStatus = new ArrayList<>();
+patientLabtestDetails.forEach(
+        inProgressTest->{
+            if(inProgressTest.getStatus().equalsIgnoreCase("In Progress")){
+                patientLabtestDetailsListviaStatus.add(inProgressTest);
+            }
+        });
+            return patientLabtestDetailsListviaStatus;
 }
 //    public Long saveReport(ReportDTO reportDTO){
 //        Report report = new Report();

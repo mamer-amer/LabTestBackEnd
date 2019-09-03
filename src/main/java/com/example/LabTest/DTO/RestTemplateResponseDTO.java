@@ -17,6 +17,18 @@ public class RestTemplateResponseDTO<T> {
     public RestTemplateResponseDTO() {
     }
 
+    public RestTemplateResponseDTO(String code, String message, T body) {
+        this.code = code;
+        this.message = message;
+        this.body = body;
+    }
+
+    public RestTemplateResponseDTO(String code, String message, List<T> bodyList) {
+        this.code = code;
+        this.message = message;
+        this.bodyList = bodyList;
+    }
+
     public RestTemplateResponseDTO(String code, String message, T body, List<T> bodyList, String createdBy, String updatedBy, Date createdAt, Date updateAt) {
         this.code = code;
         this.message = message;
