@@ -19,15 +19,24 @@ public class LabTestRegistrationService {
     public String postLabTest(LabTestRegistrationDTO labtestDTO){
 
 
-        LabTestRegistration labtest = new LabTestRegistration();
-        labtest.setName(labtestDTO.getName());
-        labtest.setDetails(labtestDTO.getDetails());
-        labtest.setPrice(labtestDTO.getPrice());
-        labtest.setCreatedDate(new Date());
-        labtest.setCreatedDate(new Date());
-        labtest.setStatus("ACTIVE");
-        labTestRegistrationRepository.save(labtest);
-        return "{\"Labtest added successfully\":1}";
+        LabTestRegistration checkName = labTestRegistrationRepository.findByName(labtestDTO.getName());
+
+
+        if(checkName == null) {
+            LabTestRegistration labtest = new LabTestRegistration();
+            labtest.setName(labtestDTO.getName());
+            labtest.setDetails(labtestDTO.getDetails());
+            labtest.setPrice(labtestDTO.getPrice());
+            labtest.setCreatedDate(new Date());
+            labtest.setCreatedDate(new Date());
+            labtest.setStatus("ACTIVE");
+            labTestRegistrationRepository.save(labtest);
+            return "{\"Labtest added successfully\":1}";
+        }
+        else
+        {
+            return "{\"Labtest already present\":1}";
+        }
     }
 
 
