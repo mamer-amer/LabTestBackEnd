@@ -14,6 +14,7 @@ public class PatientLabtestDetails {
     private Date createdDate;
 
 
+
     private Patient patientLab;
 
     public PatientLabtestDetails() {

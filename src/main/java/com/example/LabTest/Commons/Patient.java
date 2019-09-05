@@ -27,6 +27,9 @@ public class Patient {
     private String UpdatedBy;
     private Date CreatedAt;
     private Date UpdateAt;
+
+
+
     private List<PatientLabtestDetails> patientLabtestDetails;
 
     public Patient() {

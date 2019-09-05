@@ -1,26 +1,21 @@
-package com.example.LabTest.Model;
+package com.example.LabTest.DTO;
 
-import javax.persistence.*;
+import com.example.LabTest.Model.PatientReportDetails;
+
 import java.util.List;
 
-@Entity
-@Table(name = "PatientReport")
-public class PatientReport {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class PatientReportDTO {
     private Long id;
     private Long reportId;
     private Long patientId;
     private String remarks;
-
-    @OneToMany(mappedBy = "patientReport")
     private List<PatientReportDetails> patientReportDetails;
 
-    public PatientReport() {
+    public PatientReportDTO() {
     }
 
-    public PatientReport(Long reportId, Long patientId, String remarks, List<PatientReportDetails> patientReportDetails) {
+    public PatientReportDTO(Long id, Long reportId, Long patientId, String remarks, List<PatientReportDetails> patientReportDetails) {
+        this.id = id;
         this.reportId = reportId;
         this.patientId = patientId;
         this.remarks = remarks;
@@ -67,3 +62,4 @@ public class PatientReport {
         this.patientReportDetails = patientReportDetails;
     }
 }
+

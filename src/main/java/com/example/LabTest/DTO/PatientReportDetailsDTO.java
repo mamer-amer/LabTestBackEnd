@@ -1,30 +1,20 @@
-package com.example.LabTest.Model;
+package com.example.LabTest.DTO;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.example.LabTest.Model.PatientReport;
 
-import javax.persistence.*;
-
-@Entity
-@Table(name = "PatientReportDetails")
-public class PatientReportDetails {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class PatientReportDetailsDTO {
     private Long id;
     private String subtest;
     private String unit;
     private String normal;
     private String result;
-    @ManyToOne
-    @JoinColumn(name = "patient_report_id", nullable = false)
-    @JsonBackReference
     private PatientReport patientReport;
 
-    public PatientReportDetails() {
+    public PatientReportDetailsDTO() {
     }
 
-    public PatientReportDetails(String subtest, String unit, String normal, String result, PatientReport patientReport) {
+    public PatientReportDetailsDTO(Long id, String subtest, String unit, String normal, String result, PatientReport patientReport) {
+        this.id = id;
         this.subtest = subtest;
         this.unit = unit;
         this.normal = normal;

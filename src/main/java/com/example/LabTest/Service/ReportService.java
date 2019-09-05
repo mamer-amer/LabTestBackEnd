@@ -8,6 +8,10 @@ import com.example.LabTest.Model.Report;
 import com.example.LabTest.Model.ReportDetails;
 import com.example.LabTest.Repository.ReportRepository;
 import com.example.LabTest.Repository.ReportDetailsRepository;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationConfig;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.http.client.support.BasicAuthorizationInterceptor;
@@ -64,20 +68,28 @@ public List<PatientLabtestDetails> getProcessReport(){
 //    HttpEntity<String> entity = new HttpEntity<String>(headers);
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_JSON);
-    headers.set("Authorization", "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhLmNvbSIsInNjb3BlcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9BRE1JTiJ9XSwiaXNzIjoiaHR0cDovL2RldmdsYW4uY29tIiwiaWF0IjoxNTY3NDQ5NzgyLCJleHAiOjE1Njc0Njc3ODJ9.z8ztI4SQwjsTfR_0kxxF1X2q8Udbe0xvNORP_iX751A");
+    headers.set("Authorization", "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjLmNvbSIsInNjb3BlcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9BRE1JTiJ9XSwiaXNzIjoiaHR0cDovL2RldmdsYW4uY29tIiwiaWF0IjoxNTY3NjcxNzY0LCJleHAiOjE1Njc2ODk3NjR9.0C1ZPPT6b9hx26dvcPxkGlZCH4EKLFY2itYqbSw04Tw");
     HttpEntity<String> entity = new HttpEntity<String>(headers);
     ResponseEntity<RestTemplateResponseDTO> response = restTemplate.exchange("http://localhost:8080/api/opdlabtest/", HttpMethod.GET, entity, RestTemplateResponseDTO.class);
    // RestTemplateResponseDTO restTemplateResponseDTO = restTemplate.getForObject("http://localhost:8080/api/opdlabtest/", RestTemplateResponseDTO.class,entity);
 
-List<PatientLabtestDetails> patientLabtestDetails = response.getBody().getBodyList();
-List<PatientLabtestDetails> patientLabtestDetailsListviaStatus = new ArrayList<>();
-patientLabtestDetails.forEach(
-        inProgressTest->{
-            if(inProgressTest.getStatus().equalsIgnoreCase("In Progress")){
-                patientLabtestDetailsListviaStatus.add(inProgressTest);
+//List<PatientLabtestDetails> patientLabtestDetails = response.getBody().getBodyList();
+    ObjectMapper mapper = new ObjectMapper();
+    mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+    List<PatientLabtestDetails> patientLabtestDet = mapper.convertValue(
+            response.getBody().getBodyList(),
+            new TypeReference<List<PatientLabtestDetails>>() {
             }
-        });
-            return patientLabtestDetailsListviaStatus;
+    );
+//List<PatientLabtestDetails> patientLabtestDetailsViaStatus = new ArrayList<>();
+//    patientLabtestDet.forEach(
+//        inProgressTest->{
+//            if(inProgressTest.getStatus().equalsIgnoreCase("In Progress")){
+//                patientLabtestDetailsViaStatus.add(inProgressTest);
+//            }
+//        });
+
+            return patientLabtestDet;
 }
 //    public Long saveReport(ReportDTO reportDTO){
 //        Report report = new Report();
