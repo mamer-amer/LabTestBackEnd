@@ -68,7 +68,7 @@ public List<PatientLabtestDetails> getProcessReport(){
 //    HttpEntity<String> entity = new HttpEntity<String>(headers);
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_JSON);
-    headers.set("Authorization", "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjLmNvbSIsInNjb3BlcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9BRE1JTiJ9XSwiaXNzIjoiaHR0cDovL2RldmdsYW4uY29tIiwiaWF0IjoxNTY3NjcxNzY0LCJleHAiOjE1Njc2ODk3NjR9.0C1ZPPT6b9hx26dvcPxkGlZCH4EKLFY2itYqbSw04Tw");
+    headers.set("Authorization", "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJiLmNvbSIsInNjb3BlcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9BRE1JTiJ9XSwiaXNzIjoiaHR0cDovL2RldmdsYW4uY29tIiwiaWF0IjoxNTY3Nzk2MzE5LCJleHAiOjE1Njc4MTQzMTl9.UEngv2sFxmfiynigNMt5785hK9QAsNoKoi-WE6iOGBs");
     HttpEntity<String> entity = new HttpEntity<String>(headers);
     ResponseEntity<RestTemplateResponseDTO> response = restTemplate.exchange("http://localhost:8080/api/opdlabtest/", HttpMethod.GET, entity, RestTemplateResponseDTO.class);
    // RestTemplateResponseDTO restTemplateResponseDTO = restTemplate.getForObject("http://localhost:8080/api/opdlabtest/", RestTemplateResponseDTO.class,entity);
@@ -81,6 +81,14 @@ public List<PatientLabtestDetails> getProcessReport(){
             new TypeReference<List<PatientLabtestDetails>>() {
             }
     );
+    List<PatientLabtestDetails> patientLabtestDetailsViaStatus = new ArrayList<>();
+    patientLabtestDet.forEach(
+            inProgressTest->{
+                if(inProgressTest.getStatus().equalsIgnoreCase("In Progress")){
+                patientLabtestDetailsViaStatus.add(inProgressTest);
+            }
+            }
+    );
 //List<PatientLabtestDetails> patientLabtestDetailsViaStatus = new ArrayList<>();
 //    patientLabtestDet.forEach(
 //        inProgressTest->{
@@ -89,7 +97,7 @@ public List<PatientLabtestDetails> getProcessReport(){
 //            }
 //        });
 
-            return patientLabtestDet;
+            return patientLabtestDetailsViaStatus;
 }
 //    public Long saveReport(ReportDTO reportDTO){
 //        Report report = new Report();

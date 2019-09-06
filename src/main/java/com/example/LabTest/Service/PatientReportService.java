@@ -1,6 +1,7 @@
 package com.example.LabTest.Service;
 
 import com.example.LabTest.DTO.PatientReportDTO;
+import com.example.LabTest.DTO.RestTemplateResponseDTO;
 import com.example.LabTest.Model.PatientReport;
 import com.example.LabTest.Repository.PatientReportDetailsRepository;
 import com.example.LabTest.Repository.PatientReportRepository;
@@ -52,5 +53,10 @@ public class PatientReportService {
             return patientReport1;
         }
         return null;
+    }
+    public RestTemplateResponseDTO getPatientReportByPatientId(Long patientId){
+        List<PatientReport> patientReports = patientReportRepository.findByPatientId(patientId);
+        RestTemplateResponseDTO response = new RestTemplateResponseDTO("200", "Get Successfully", patientReports);
+        return response;
     }
 }
