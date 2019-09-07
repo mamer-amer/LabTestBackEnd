@@ -1,6 +1,7 @@
 package com.example.LabTest.Controller;
 
 import com.example.LabTest.DTO.PatientReportDTO;
+import com.example.LabTest.DTO.RestTemplateResponseDTO;
 import com.example.LabTest.Model.PatientReport;
 import com.example.LabTest.Repository.PatientReportDetailsRepository;
 import com.example.LabTest.Repository.PatientReportRepository;
@@ -28,15 +29,14 @@ public class PatientReportController {
     }
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public List<PatientReport> getAllPatientReport(){
-    return patientReportService.getAllPatientReport();
+        return patientReportService.getAllPatientReport();
     }
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public PatientReport getPatientReportById(@PathVariable("id") Long id){
         return patientReportService.getPatientReportById(id);
     }
-
-    @RequestMapping(value = "/changeStatus/{id}", method = RequestMethod.PUT)
-    public String changeLabtestDetailsStatus(@PathVariable("id") Long id){
-        return patientReportService.changeLabtestDetailsStatus(id);
+    @RequestMapping(value = "/patient/{patientId}", method = RequestMethod.GET)
+    public RestTemplateResponseDTO getPatientReportByPatientId(@PathVariable("patientId") Long patientId){
+        return patientReportService.getPatientReportByPatientId(patientId);
     }
 }

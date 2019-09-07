@@ -45,7 +45,7 @@ public class PatientReportService {
     }
 
     public List<PatientReport> getAllPatientReport(){
-       return patientReportRepository.findAll();
+        return patientReportRepository.findAll();
     }
     public PatientReport getPatientReportById(Long id){
         Optional<PatientReport> patientReport = patientReportRepository.findById(id);
@@ -54,6 +54,11 @@ public class PatientReportService {
             return patientReport1;
         }
         return null;
+    }
+    public RestTemplateResponseDTO getPatientReportByPatientId(Long patientId){
+        List<PatientReport> patientReports = patientReportRepository.findByPatientId(patientId);
+        RestTemplateResponseDTO response = new RestTemplateResponseDTO("200", "Get Successfully", patientReports);
+        return response;
     }
     public String changeLabtestDetailsStatus(Long id){
         HttpHeaders headers = new HttpHeaders();
