@@ -6,6 +6,7 @@ import com.example.LabTest.Model.PatientReport;
 import com.example.LabTest.Repository.PatientReportDetailsRepository;
 import com.example.LabTest.Repository.PatientReportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -44,7 +45,7 @@ public class PatientReportService {
     }
 
     public List<PatientReport> getAllPatientReport(){
-       return patientReportRepository.findAll();
+        return patientReportRepository.findAll();
     }
     public PatientReport getPatientReportById(Long id){
         Optional<PatientReport> patientReport = patientReportRepository.findById(id);
@@ -58,5 +59,20 @@ public class PatientReportService {
         List<PatientReport> patientReports = patientReportRepository.findByPatientId(patientId);
         RestTemplateResponseDTO response = new RestTemplateResponseDTO("200", "Get Successfully", patientReports);
         return response;
+    }
+    public String changeLabtestDetailsStatus(Long id){
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("Authorization", "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJiLmNvbSIsInNjb3BlcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9BRE1JTiJ9XSwiaXNzIjoiaHR0cDovL2RldmdsYW4uY29tIiwiaWF0IjoxNTY3ODc4MzIxLCJleHAiOjE1Njc4OTYzMjF9.SenIskJhEH0YXSR5cRNCsTZJpRNj8FkfkNnd-_HapvU");
+//        RestTemplateResponseDTO restTemplateResponseDTO = new RestTemplateResponseDTO("200", "Updated Successfully",id);
+//        HttpEntity<RestTemplateResponseDTO> entity = new HttpEntity<>(restTemplateResponseDTO,headers);
+        HttpEntity<String> entity = new HttpEntity<String>(headers);
+        ResponseEntity<RestTemplateResponseDTO> response = restTemplate.exchange("http://localhost:8080/api/opdlabtest/"+id, HttpMethod.PUT,entity,RestTemplateResponseDTO.class);
+        if((response.getBody().getCode()).equalsIgnoreCase("200")){
+            return "{\"Updated Successfully\":1}";
+        }
+        else{
+            return "{\"Something went wrong\":1}";
+        }
     }
 }
