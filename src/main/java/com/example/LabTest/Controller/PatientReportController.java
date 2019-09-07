@@ -34,4 +34,9 @@ public class PatientReportController {
     public PatientReport getPatientReportById(@PathVariable("id") Long id){
         return patientReportService.getPatientReportById(id);
     }
+
+    @RequestMapping(value = "/changeStatus/{id}", method = RequestMethod.PUT)
+    public String changeLabtestDetailsStatus(@PathVariable("id") Long id){
+        return patientReportService.changeLabtestDetailsStatus(id);
+    }
 }
