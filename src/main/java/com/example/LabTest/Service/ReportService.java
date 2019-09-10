@@ -13,6 +13,7 @@ import com.fasterxml.jackson.databind.DeserializationConfig;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.http.client.support.BasicAuthorizationInterceptor;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,8 @@ public class ReportService {
     ReportDetailsRepository reportDetailsRepository;
     @Autowired
     RestTemplate restTemplate;
+    @Value("${user.token}")
+    public String userToken;
 public String saveGenerateReport(GenerateReportDTO generateReportDTO){
     Report report = new Report();
     report.setReportName(generateReportDTO.getLabtestName());
@@ -68,7 +71,7 @@ public List<PatientLabtestDetails> getProcessReport(){
 //    HttpEntity<String> entity = new HttpEntity<String>(headers);
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_JSON);
-    headers.set("Authorization", "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJiLmNvbSIsInNjb3BlcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9BRE1JTiJ9XSwiaXNzIjoiaHR0cDovL2RldmdsYW4uY29tIiwiaWF0IjoxNTY3Nzk2MzE5LCJleHAiOjE1Njc4MTQzMTl9.UEngv2sFxmfiynigNMt5785hK9QAsNoKoi-WE6iOGBs");
+    headers.set("Authorization", userToken);
     HttpEntity<String> entity = new HttpEntity<String>(headers);
     ResponseEntity<RestTemplateResponseDTO> response = restTemplate.exchange("http://localhost:8080/api/opdlabtest/", HttpMethod.GET, entity, RestTemplateResponseDTO.class);
    // RestTemplateResponseDTO restTemplateResponseDTO = restTemplate.getForObject("http://localhost:8080/api/opdlabtest/", RestTemplateResponseDTO.class,entity);

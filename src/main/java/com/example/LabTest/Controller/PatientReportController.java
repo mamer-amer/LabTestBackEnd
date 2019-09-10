@@ -39,4 +39,9 @@ public class PatientReportController {
     public RestTemplateResponseDTO getPatientReportByPatientId(@PathVariable("patientId") Long patientId){
         return patientReportService.getPatientReportByPatientId(patientId);
     }
+    @RequestMapping(value = "/changeStatus/{id}", method = RequestMethod.PUT)
+            public String changeLabtestDetailsStatus(@PathVariable("id") Long id)
+    {
+        return patientReportService.changeLabtestDetailsStatus(id);
+    }
 }

@@ -6,6 +6,7 @@ import com.example.LabTest.Model.PatientReport;
 import com.example.LabTest.Repository.PatientReportDetailsRepository;
 import com.example.LabTest.Repository.PatientReportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -22,8 +23,8 @@ public class PatientReportService {
     PatientReportDetailsRepository patientReportDetailsRepository;
     @Autowired
     RestTemplate restTemplate;
-
-
+@Value("${user.token}")
+public String userToken;
     //Save Patient Report and return it!!
 
     public PatientReport savePatientReportnReturn(PatientReport patientReport){
@@ -63,7 +64,7 @@ public class PatientReportService {
     public String changeLabtestDetailsStatus(Long id){
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.set("Authorization", "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJiLmNvbSIsInNjb3BlcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9BRE1JTiJ9XSwiaXNzIjoiaHR0cDovL2RldmdsYW4uY29tIiwiaWF0IjoxNTY3ODc4MzIxLCJleHAiOjE1Njc4OTYzMjF9.SenIskJhEH0YXSR5cRNCsTZJpRNj8FkfkNnd-_HapvU");
+        headers.set("Authorization", userToken);
 //        RestTemplateResponseDTO restTemplateResponseDTO = new RestTemplateResponseDTO("200", "Updated Successfully",id);
 //        HttpEntity<RestTemplateResponseDTO> entity = new HttpEntity<>(restTemplateResponseDTO,headers);
         HttpEntity<String> entity = new HttpEntity<String>(headers);
