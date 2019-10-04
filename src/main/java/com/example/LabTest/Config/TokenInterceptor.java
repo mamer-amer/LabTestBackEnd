@@ -18,12 +18,18 @@ public class TokenInterceptor implements HandlerInterceptor {
             HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
         //System.out.println("Pre Handle method is Calling " + request.getHeader("Authorization"));
+            if(request.getHeader("Authorization") != null) {
 
-        tokenContainer.setAuthToken(request.getHeader("Authorization"));
+                tokenContainer.setAuthToken(request.getHeader("Authorization"));
 
 
-        System.out.println("Pre Handle method is Calling " + TokenContainer.getInstance().getAuthToken());
-        return true;
+                System.out.println("Pre Handle method is Calling " + TokenContainer.getInstance().getAuthToken());
+                return true;
+            }
+            else{
+                return false;
+            }
+
     }
 
 //    @Override
