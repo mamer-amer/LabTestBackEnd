@@ -68,9 +68,7 @@ public class LabTestRegistrationService {
     public List<LabTestRegistration> delLabTest(Long id) {
         Optional<LabTestRegistration> labtest = labTestRegistrationRepository.findById(id);
         if (labtest.isPresent()){
-            LabTestRegistration lt = labtest.get();
-            lt.setStatus("INACTIVE");
-            labTestRegistrationRepository.save(lt);
+            labTestRegistrationRepository.deleteById(id);
             return getLabTest();
         }
         else {
