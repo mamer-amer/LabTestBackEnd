@@ -1,6 +1,7 @@
 package com.example.LabTest.Service;
 
 import com.example.LabTest.Commons.PatientLabtestDetails;
+import com.example.LabTest.Commons.TokenContainer;
 import com.example.LabTest.DTO.GenerateReportDTO;
 import com.example.LabTest.DTO.ReportDTO;
 import com.example.LabTest.DTO.RestTemplateResponseDTO;
@@ -32,8 +33,7 @@ public class ReportService {
     ReportDetailsRepository reportDetailsRepository;
     @Autowired
     RestTemplate restTemplate;
-    @Value("${user.token}")
-    public String userToken;
+
 public String saveGenerateReport(GenerateReportDTO generateReportDTO){
     Report report = new Report();
     report.setReportName(generateReportDTO.getLabtestName());
@@ -71,7 +71,7 @@ public List<PatientLabtestDetails> getProcessReport(){
 //    HttpEntity<String> entity = new HttpEntity<String>(headers);
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_JSON);
-    headers.set("Authorization", userToken);
+    headers.set("Authorization", TokenContainer.getInstance().getAuthToken());
     HttpEntity<String> entity = new HttpEntity<String>(headers);
     ResponseEntity<RestTemplateResponseDTO> response = restTemplate.exchange("http://localhost:8080/api/opdlabtest/", HttpMethod.GET, entity, RestTemplateResponseDTO.class);
    // RestTemplateResponseDTO restTemplateResponseDTO = restTemplate.getForObject("http://localhost:8080/api/opdlabtest/", RestTemplateResponseDTO.class,entity);
