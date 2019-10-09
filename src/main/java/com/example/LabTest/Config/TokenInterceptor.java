@@ -19,7 +19,7 @@ public class TokenInterceptor implements HandlerInterceptor {
 
         //System.out.println("Pre Handle method is Calling " + request.getHeader("Authorization"));
             if(request.getHeader("Authorization") != null) {
-
+//                    response.setHeader("Access-Control-Allow-Origin", "*");
                 tokenContainer.setAuthToken(request.getHeader("Authorization"));
 
 
