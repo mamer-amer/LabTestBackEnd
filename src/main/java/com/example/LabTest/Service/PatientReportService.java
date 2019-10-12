@@ -1,5 +1,6 @@
 package com.example.LabTest.Service;
 
+import com.example.LabTest.Commons.TokenContainer;
 import com.example.LabTest.DTO.PatientReportDTO;
 import com.example.LabTest.DTO.RestTemplateResponseDTO;
 import com.example.LabTest.Model.PatientReport;
@@ -23,8 +24,7 @@ public class PatientReportService {
     PatientReportDetailsRepository patientReportDetailsRepository;
     @Autowired
     RestTemplate restTemplate;
-@Value("${user.token}")
-public String userToken;
+
     //Save Patient Report and return it!!
 
     public PatientReport savePatientReportnReturn(PatientReport patientReport){
@@ -68,9 +68,7 @@ public String userToken;
     public String changeLabtestDetailsStatus(Long id){
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.set("Authorization", userToken);
-//        RestTemplateResponseDTO restTemplateResponseDTO = new RestTemplateResponseDTO("200", "Updated Successfully",id);
-//        HttpEntity<RestTemplateResponseDTO> entity = new HttpEntity<>(restTemplateResponseDTO,headers);
+        headers.set("Authorization", TokenContainer.getInstance().getAuthToken());
         HttpEntity<String> entity = new HttpEntity<String>(headers);
         ResponseEntity<RestTemplateResponseDTO> response = restTemplate.exchange("http://localhost:8080/api/opdlabtest/"+id, HttpMethod.PUT,entity,RestTemplateResponseDTO.class);
         if((response.getBody().getCode()).equalsIgnoreCase("200")){
