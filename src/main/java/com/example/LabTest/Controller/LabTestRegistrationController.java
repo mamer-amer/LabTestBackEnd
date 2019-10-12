@@ -25,11 +25,13 @@ public class LabTestRegistrationController {
 
     @GetMapping("/opd")
     public RestTemplateResponseDTO getlabtestOpd(){
+
         return labTestRegistrationService.getLabTestOpd();
     }
 
     @GetMapping("/")
     public List<LabTestRegistration> getlabtest(){
+
         return labTestRegistrationService.getLabTest();
     }
 
