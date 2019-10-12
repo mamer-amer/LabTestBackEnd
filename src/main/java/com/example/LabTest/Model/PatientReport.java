@@ -1,5 +1,7 @@
 package com.example.LabTest.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -13,17 +15,18 @@ public class PatientReport {
     private Long reportId;
     private Long patientId;
     private String remarks;
-
+    private String labTestName;
     @OneToMany(mappedBy = "patientReport")
     private List<PatientReportDetails> patientReportDetails;
 
     public PatientReport() {
     }
 
-    public PatientReport(Long reportId, Long patientId, String remarks, List<PatientReportDetails> patientReportDetails) {
+    public PatientReport(Long reportId, Long patientId, String remarks, String labTestName, List<PatientReportDetails> patientReportDetails) {
         this.reportId = reportId;
         this.patientId = patientId;
         this.remarks = remarks;
+        this.labTestName = labTestName;
         this.patientReportDetails = patientReportDetails;
     }
 
@@ -57,6 +60,14 @@ public class PatientReport {
 
     public void setRemarks(String remarks) {
         this.remarks = remarks;
+    }
+
+    public String getLabTestName() {
+        return labTestName;
+    }
+
+    public void setLabTestName(String labTestName) {
+        this.labTestName = labTestName;
     }
 
     public List<PatientReportDetails> getPatientReportDetails() {

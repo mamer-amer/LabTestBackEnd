@@ -9,16 +9,19 @@ public class PatientReportDTO {
     private Long reportId;
     private Long patientId;
     private String remarks;
+    private String labTestName;
+
     private List<PatientReportDetails> patientReportDetails;
 
     public PatientReportDTO() {
     }
 
-    public PatientReportDTO(Long id, Long reportId, Long patientId, String remarks, List<PatientReportDetails> patientReportDetails) {
+    public PatientReportDTO(Long id, Long reportId, Long patientId, String remarks, String labTestName, List<PatientReportDetails> patientReportDetails) {
         this.id = id;
         this.reportId = reportId;
         this.patientId = patientId;
         this.remarks = remarks;
+        this.labTestName = labTestName;
         this.patientReportDetails = patientReportDetails;
     }
 
@@ -52,6 +55,14 @@ public class PatientReportDTO {
 
     public void setRemarks(String remarks) {
         this.remarks = remarks;
+    }
+
+    public String getLabTestName() {
+        return labTestName;
+    }
+
+    public void setLabTestName(String labTestName) {
+        this.labTestName = labTestName;
     }
 
     public List<PatientReportDetails> getPatientReportDetails() {

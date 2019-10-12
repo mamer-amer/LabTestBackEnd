@@ -4,6 +4,8 @@ import com.example.LabTest.DTO.SubTestsDTO;
 import com.example.LabTest.Model.SubTests;
 import com.example.LabTest.Repository.SubTestsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,12 +16,25 @@ public class SubtestService {
     @Autowired
     SubTestsRepository subTestsRepository;
 
-    public String saveSubTest(SubTestsDTO subTestsDTO){
+    public ResponseEntity<String> saveSubTest(SubTestsDTO subTestsDTO){
+        String subtestName = "";
         SubTests subTests = new SubTests();
-        subTests.setSubtestName(subTestsDTO.getSubtestName());
-        subTestsRepository.save(subTests);
+        try{
+            subtestName = subTestsRepository.findBySubtestName(subTestsDTO.getSubtestName().toLowerCase());
+        }catch (Exception e){
+            System.out.println(e);
+        }
+        if(subtestName!=null) {
+            return new ResponseEntity<String>("\"DUPLICATE\"",HttpStatus.ALREADY_REPORTED);
+        }
+        else{
+            subTests.setSubtestName(subTestsDTO.getSubtestName());
+            subTestsRepository.save(subTests);
+            return new ResponseEntity<String>("\"SUCCESSFULL\"",HttpStatus.OK);
+        }
 
-        return "{\"successful\":1}";
+
+
 
 
     }

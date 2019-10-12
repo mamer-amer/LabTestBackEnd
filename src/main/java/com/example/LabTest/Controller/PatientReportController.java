@@ -8,6 +8,7 @@ import com.example.LabTest.Repository.PatientReportRepository;
 import com.example.LabTest.Service.PatientReportDetailsService;
 import com.example.LabTest.Service.PatientReportService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,20 +28,41 @@ public class PatientReportController {
     public String postPatientReport(@RequestBody PatientReportDTO patientReportDTO){
         return patientReportService.savePatientReport(patientReportDTO);
     }
+
+
+
+
+    @RequestMapping(value = "/patient/update/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<String> updatePatientReport(@PathVariable("id") Long id, @RequestBody PatientReportDTO patientReportDTO){
+        return patientReportService.updatePatientReport(id,patientReportDTO);
+    }
+
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public List<PatientReport> getAllPatientReport(){
         return patientReportService.getAllPatientReport();
     }
+
+
+
+
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public PatientReport getPatientReportById(@PathVariable("id") Long id){
         return patientReportService.getPatientReportById(id);
     }
+
+
+
     @RequestMapping(value = "/patient/{patientId}", method = RequestMethod.GET)
     public RestTemplateResponseDTO getPatientReportByPatientId(@PathVariable("patientId") Long patientId){
         return patientReportService.getPatientReportByPatientId(patientId);
     }
+
+
+
     @RequestMapping(value = "/changeStatus/{id}", method = RequestMethod.GET)
     public String changeLabtestDetailsStatus(@PathVariable("id") Long id) {
         return patientReportService.changeLabtestDetailsStatus(id);
     }
+
 }

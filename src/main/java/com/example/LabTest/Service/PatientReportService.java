@@ -37,6 +37,7 @@ public class PatientReportService {
         patientReport.setPatientId(patientReportDTO.getPatientId());
         patientReport.setRemarks(patientReportDTO.getRemarks());
         patientReport.setReportId(patientReportDTO.getReportId());
+        patientReport.setLabTestName(patientReportDTO.getLabTestName());
         PatientReport patientReport2 = savePatientReportnReturn(patientReport);
         patientReportDTO.getPatientReportDetails().forEach(childPatientReport->{
             childPatientReport.setPatientReport(patientReport2);
@@ -45,10 +46,13 @@ public class PatientReportService {
         return "{\"ADDED SUCCESFULLY\":1}";
     }
 
-    public List<PatientReport> getAllPatientReport(){
+    public List<PatientReport> getAllPatientReport()
+    {
+
         return patientReportRepository.findAll();
     }
     public PatientReport getPatientReportById(Long id){
+
         Optional<PatientReport> patientReport = patientReportRepository.findById(id);
         if(patientReport.isPresent()){
             PatientReport patientReport1 = patientReport.get();
@@ -73,5 +77,27 @@ public class PatientReportService {
         else{
             return "{\"Something went wrong\":1}";
         }
+    }
+
+    public ResponseEntity<String> updatePatientReport(Long id,PatientReportDTO patientReportDTO){
+            Optional<PatientReport> patientReportExist = patientReportRepository.findById(id);
+        if(patientReportExist.isPresent()){
+            PatientReport patientReport = patientReportExist.get();
+            patientReport.setPatientId(patientReportDTO.getPatientId());
+            patientReport.setRemarks(patientReportDTO.getRemarks());
+            patientReport.setReportId(patientReportDTO.getReportId());
+            patientReport.setLabTestName(patientReportDTO.getLabTestName());
+            PatientReport patientReport2 = savePatientReportnReturn(patientReport);
+            patientReportDTO.getPatientReportDetails().forEach(childPatientReport->{
+                childPatientReport.setPatientReport(patientReport2);
+            });
+            patientReportDetailsRepository.saveAll(patientReportDTO.getPatientReportDetails());
+            return new ResponseEntity<String>("{\"UPDATED\":1}",HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity<String>("{\"NOTFOUND\":1}",HttpStatus.ALREADY_REPORTED);
+        }
+
+
     }
 }

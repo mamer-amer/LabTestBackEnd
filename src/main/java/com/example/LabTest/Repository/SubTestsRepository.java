@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 @Qualifier("subTestsRepository")
 public interface SubTestsRepository  extends JpaRepository<SubTests,Long> {
+    public String findBySubtestName(String subtestName);
 }
