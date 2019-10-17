@@ -2,6 +2,7 @@ package com.example.LabTest.Config;
 
 
 import com.example.LabTest.Commons.TokenContainer;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -18,6 +19,9 @@ public class TokenInterceptor implements HandlerInterceptor {
             HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
         //System.out.println("Pre Handle method is Calling " + request.getHeader("Authorization"));
+            if(request.getMethod().equalsIgnoreCase(HttpMethod.OPTIONS.name())){
+                return  true;
+            }
             if(request.getHeader("Authorization") != null) {
 //                    response.setHeader("Access-Control-Allow-Origin", "*");
                 tokenContainer.setAuthToken(request.getHeader("Authorization"));
