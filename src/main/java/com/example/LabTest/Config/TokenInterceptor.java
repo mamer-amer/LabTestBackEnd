@@ -18,12 +18,12 @@ public class TokenInterceptor implements HandlerInterceptor {
     public boolean preHandle(
             HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-        //System.out.println("Pre Handle method is Calling " + request.getHeader("Authorization"));
+
             if(request.getMethod().equalsIgnoreCase(HttpMethod.OPTIONS.name())){
                 return  true;
             }
             if(request.getHeader("Authorization") != null) {
-//                    response.setHeader("Access-Control-Allow-Origin", "*");
+
                 tokenContainer.setAuthToken(request.getHeader("Authorization"));
 
 
@@ -36,17 +36,5 @@ public class TokenInterceptor implements HandlerInterceptor {
 
     }
 
-//    @Override
-//    public void postHandle(
-//            HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-//
-//        System.out.println("Post Handle method is Calling");
-//    }
-//
-//    @Override
-//    public void afterCompletion(HttpServletRequest request, HttpServletResponse response,git
-//                                Object handler, Exception exception) throws Exception {
-//        System.out.println("Request and Response are completed");
-//
-//    }
+
 }

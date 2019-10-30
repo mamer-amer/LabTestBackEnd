@@ -4,7 +4,10 @@ import com.example.LabTest.DTO.DepartmentDTO;
 import com.example.LabTest.DTO.LabTestDTO;
 import com.example.LabTest.Model.Department;
 import com.example.LabTest.Model.LabTest;
+import com.example.LabTest.Model.SubTests;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import com.example.LabTest.Repository.DepartmentRepository;
 import com.example.LabTest.Repository.LabTestRepository;
@@ -22,13 +25,25 @@ public class DepartmentService {
     DepartmentService departmentService;
 
 
-    public String addDepartment(DepartmentDTO DeptDTO){
+    public ResponseEntity<String> addDepartment(DepartmentDTO DeptDTO){
 
-    Department departmentModel = new Department();
-        departmentModel.setDepartmentName(DeptDTO.getDepartmentName());
-        departmentRepository.save(departmentModel);
+        String departmentName = "";
+        Department department = new Department();
+        try{
+            departmentName = departmentRepository.findByDepartmentName(DeptDTO.getDepartmentName().toLowerCase());
+        }catch (Exception e){
+            System.out.println(e);
+        }
+        if(departmentName!=null) {
+            return new ResponseEntity<String>("\"DUPLICATE\"", HttpStatus.ALREADY_REPORTED);
+        }
+        else{
+            department.setDepartmentName(DeptDTO.getDepartmentName());
+            departmentRepository.save(department);
+            return new ResponseEntity<String>("\"SUCCESSFULL\"",HttpStatus.OK);
+        }
 
-        return "{\"department added succuessfully\":1}";
+
     }
 
     public List<Department> getDepartment(){

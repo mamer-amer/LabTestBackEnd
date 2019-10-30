@@ -5,6 +5,7 @@ import com.example.LabTest.Model.Department;
 import com.example.LabTest.Model.LabTest;
 import com.example.LabTest.Service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public class DepartmentController {
     DepartmentService departmentService;
 
     @PostMapping("/")
-    public String addNewDepartment(@RequestBody DepartmentDTO departmentDTO){
+    public ResponseEntity<String> addNewDepartment(@RequestBody DepartmentDTO departmentDTO){
         return departmentService.addDepartment(departmentDTO);
 
     }
