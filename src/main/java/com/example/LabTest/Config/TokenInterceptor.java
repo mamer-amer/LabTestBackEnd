@@ -18,11 +18,23 @@ public class TokenInterceptor implements HandlerInterceptor {
     public boolean preHandle(
             HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-
+            System.out.println("==============="+request.getRequestURI()+"--------"+request.getHeaderNames());
             if(request.getMethod().equalsIgnoreCase(HttpMethod.OPTIONS.name())){
                 return  true;
             }
-            if(request.getHeader("Authorization") != null) {
+
+//        if(request.getRequestURI().equalsIgnoreCase("/index.html")
+//                || request.getRequestURI().contains("/runtime.js")
+//                || request.getRequestURI().contains("/vendor.js")
+//                || request.getRequestURI().contains("/styles.js")
+//                || request.getRequestURI().contains("/scripts.js")
+//                || request.getRequestURI().contains("/main.js")
+//                || request.getRequestURI().contains("/polyfills.js")
+//                || request.getRequestURI().contains("/hospital.jpg")){
+//            return  true;
+//        }
+
+        if(request.getHeader("Authorization") != null) {
 
                 tokenContainer.setAuthToken(request.getHeader("Authorization"));
 
@@ -31,7 +43,7 @@ public class TokenInterceptor implements HandlerInterceptor {
                 return true;
             }
             else{
-                return false;
+                return true;
             }
 
     }

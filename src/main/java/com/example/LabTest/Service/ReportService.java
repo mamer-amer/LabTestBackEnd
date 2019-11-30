@@ -34,6 +34,10 @@ public class ReportService {
     @Autowired
     RestTemplate restTemplate;
 
+    @Value("${baseurl}")
+    public  String  url;
+
+
 public String saveGenerateReport(GenerateReportDTO generateReportDTO){
     Report report = new Report();
     report.setReportName(generateReportDTO.getLabtestName());
@@ -73,7 +77,7 @@ public List<PatientLabtestDetails> getProcessReport(){
     headers.setContentType(MediaType.APPLICATION_JSON);
     headers.set("Authorization", TokenContainer.getInstance().getAuthToken());
     HttpEntity<String> entity = new HttpEntity<String>(headers);
-    ResponseEntity<RestTemplateResponseDTO> response = restTemplate.exchange("http://localhost:8080/api/opdlabtest/", HttpMethod.GET, entity, RestTemplateResponseDTO.class);
+    ResponseEntity<RestTemplateResponseDTO> response = restTemplate.exchange(this.url+"/api/opdlabtest/", HttpMethod.GET, entity, RestTemplateResponseDTO.class);
    // RestTemplateResponseDTO restTemplateResponseDTO = restTemplate.getForObject("http://localhost:8080/api/opdlabtest/", RestTemplateResponseDTO.class,entity);
 
 //List<PatientLabtestDetails> patientLabtestDetails = response.getBody().getBodyList();
